@@ -16,11 +16,13 @@ The architure is identical to LLaVA-v1.5, so the {train, eval, demo, serve} are 
 
 Then specifying the models in the following model zoo.
 
+## Note
+
+The training is done on 8x80G gpus on 1 node, the settings are the same as llava-v1.5 unless stated otherwise.
+
 ## Model Zoo
 
-- The training is done on 8x80G gpus on 1 node, the settings are the same as llava-v1.5 unless stated otherwise.
 - For stage-1 training, we use deepspeed zero2 by default. But for 13b we use zero3 and `gradient_accumulate_steps=2` and half `per_device_batch_size` to avoid OOM.
-
 
 | Name                                | Comment                          | Stage | Checkpoint                                                   | LLM             | Vision Encoder | Projection |
 | ----------------------------------- | -------------------------------- | ----- | ------------------------------------------------------------ | --------------- | -------------- | ---------- |
@@ -40,13 +42,13 @@ The procedure is similar to LLaVA-v1.5 but with different dataset.
 
 | Name                      | Stage | Pretrain  Data Amount | Finetune Data Amount        | Pretrain Data                                                | Finetune Data                                                |
 | ------------------------- | ----- | --------------------- | --------------------------- | ------------------------------------------------------------ | ------------------------------------------------------------ |
-| any general purpose model | 1,2   | 1,166,048             | 359,783= 96384+222711+40688 | share-captioner_coco_lcs_sam_1246k_1107.json(filtered ill examples) | sharegpt4v_instruct_gpt4-vision_cap100k.json(filtered ill and non-exist examples) lvis_instruct4v_220k.json llava_v1_5_mix665k.json(only text-only examples) |
+| any general purpose model | 1,2   | 1,166,048             | 359,783<br>=96384+222711+40688 | share-captioner_coco_lcs_sam_1246k_1107.json(filtered ill examples) | sharegpt4v_instruct_gpt4-vision_cap100k.json(filtered ill and non-exist examples)<br>lvis_instruct4v_220k.json<br>llava_v1_5_mix665k.json(only text-only examples) |
 | any pretrain model        | 1     | 1,166,048             | /                           | share-captioner_coco_lcs_sam_1246k_1107.json(filtered ill examples) | /                                                            |
 
 
 ### Stage 1: image-caption alignment
 
-In this stage, only `mlp2x_gelu`, the projector, is trained. After training, it could do captioning in LLaVA's `plain` template (i.e. no chat template).
+In this stage, only the projector `mlp2x_gelu` is trained. After training, it could do captioning in LLaVA's `plain` template (i.e. no chat template).
 
 Dataset used:
 - https://huggingface.co/datasets/Lin-Chen/ShareGPT4V, share-captioner_coco_lcs_sam_1246k_1107.json
@@ -60,7 +62,7 @@ Dataset used:
 
 ### Stage 2: instruction fine-tuning
 
-In this stage, the projector and the LLM are trained.
+In this stage, both the projector and the LLM are trained.
 
 Dataset used:
 - https://huggingface.co/datasets/Lin-Chen/ShareGPT4V, sharegpt4v_instruct_gpt4-vision_cap100k.json
