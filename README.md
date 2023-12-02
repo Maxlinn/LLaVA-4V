@@ -21,19 +21,18 @@ Then specifying the models in the following model zoo.
 - For stage-1 training, we use deepspeed zero2 for 7B while zero3 for 13B. Since the captions are much longer, using zero2 for 13B will cause OOM for `per_device_batch_size=32`.
 
 
-| Name                                    | Stage | Checkpoint                                                   | LLM             | Vision Encoder | Projection | Pretrain  Data Amount | Finetune Data Amount             | Pretrain Data                                | Finetune Data                                                |
-| --------------------------------------- | ----- | ------------------------------------------------------------ | --------------- | -------------- | ---------- | --------------------- | -------------------------------- | -------------------------------------------- | ------------------------------------------------------------ |
-| DistillGPT4V-13B_vit-l14-336px          | 1,2   | training                                                     | Vicuna-13B-v1.5 | CLIP-L-336px   | MLP-2x     | 1,166,048             | 359,787=<br />96388+222711+40688 | share-captioner_coco_lcs_sam_1246k_1107.json | sharegpt4v_instruct_gpt4-vision_cap100k.json(filtered ill examples)<br /> lvis_instruct4v_220k.json<br />llava_v1_5_mix665k.json(only text-only examples) |
-| DistillGPT4V-13B_vit-l14-336px_Pretrain | 1     | training                                                     | Vicuna-13B-v1.5 | CLIP-L-336px   | MLP-2x     | 1,166,048             | /                                | share-captioner_coco_lcs_sam_1246k_1107.json | /                                                            |
-| DistillGPT4V-7B_vit-l14-336px           | 1,2   | training                                                     | Vicuna-7B-v1.5  | CLIP-L-336px   | MLP-2x     | 1,166,048             | 359,787=<br />96388+222711+40688 | share-captioner_coco_lcs_sam_1246k_1107.json | sharegpt4v_instruct_gpt4-vision_cap100k.json(filtered ill examples)<br /> lvis_instruct4v_220k.json<br />llava_v1_5_mix665k.json(only text-only examples) |
-| DistillGPT4V-7B_vit-l14-336px_Pretrain  | 1     | [Maxlinn/DistillGPT4V-7B_vit-l14-336px_Pretrain](https://huggingface.co/Maxlinn/DistillGPT4V-7B_vit-l14-336px_Pretrain) | Vicuna-7B-v1.5  | CLIP-L-336px   | MLP-2x     | 1,166,048             | /                                | share-captioner_coco_lcs_sam_1246k_1107.json | /                                                            |
-
+| Name                                    | Stage | Checkpoint                                                   | LLM             | Vision Encoder | Projection | Pretrain  Data Amount | Finetune Data Amount             | Pretrain Data                                                | Finetune Data                                                |
+| --------------------------------------- | ----- | ------------------------------------------------------------ | --------------- | -------------- | ---------- | --------------------- | -------------------------------- | ------------------------------------------------------------ | ------------------------------------------------------------ |
+| DistillGPT4V-13B_vit-l14-336px          | 1,2   | training                                                     | Vicuna-13B-v1.5 | CLIP-L-336px   | MLP-2x     | 1,166,048             | 359,787=<br />96388+222711+40688 | share-captioner_coco_lcs_sam_1246k_1107.json(filtered ill examples) | sharegpt4v_instruct_gpt4-vision_cap100k.json(filtered ill examples)<br /> lvis_instruct4v_220k.json<br />llava_v1_5_mix665k.json(only text-only examples) |
+| DistillGPT4V-13B_vit-l14-336px_Pretrain | 1     | training                                                     | Vicuna-13B-v1.5 | CLIP-L-336px   | MLP-2x     | 1,166,048             | /                                | share-captioner_coco_lcs_sam_1246k_1107.json(filtered ill examples) | /                                                            |
+| DistillGPT4V-7B_vit-l14-336px           | 1,2   | training                                                     | Vicuna-7B-v1.5  | CLIP-L-336px   | MLP-2x     | 1,166,048             | 359,787=<br />96388+222711+40688 | share-captioner_coco_lcs_sam_1246k_1107.json(filtered ill examples) | sharegpt4v_instruct_gpt4-vision_cap100k.json(filtered ill examples)<br /> lvis_instruct4v_220k.json<br />llava_v1_5_mix665k.json(only text-only examples) |
+| DistillGPT4V-7B_vit-l14-336px_Pretrain  | 1     | [Maxlinn/DistillGPT4V-7B_vit-l14-336px_Pretrain](https://huggingface.co/Maxlinn/DistillGPT4V-7B_vit-l14-336px_Pretrain) | Vicuna-7B-v1.5  | CLIP-L-336px   | MLP-2x     | 1,166,048             | /                                | share-captioner_coco_lcs_sam_1246k_1107.json(filtered ill examples) | /                                                            |
 
 
 
 ## Training
 
-Identical to LLaVA-v1.5.
+Procedure similar to LLaVA-v1.5 but with different dataset.
 
 ### Stage 1: image-caption alignment
 
