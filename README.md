@@ -22,11 +22,10 @@ Then specifying the models in the following model zoo.
 
 | Name                                    | Stage | Checkpoint                                                   | LLM             | Vision Encoder | Projection | Pretrain  Data Amount | Finetune Data Amount             | Pretrain Data                                                | Finetune Data                                                |
 | --------------------------------------- | ----- | ------------------------------------------------------------ | --------------- | -------------- | ---------- | --------------------- | -------------------------------- | ------------------------------------------------------------ | ------------------------------------------------------------ |
-| DistillGPT4V-13B_vit-l14-336px          | 1,2   | training                                                     | Vicuna-13B-v1.5 | CLIP-L-336px   | MLP-2x     | 1,166,048             | 359,783=<br />96384+222711+40688 | share-captioner_coco_lcs_sam_1246k_1107.json(filtered ill and no-exist examples) | sharegpt4v_instruct_gpt4-vision_cap100k.json(filtered ill examples)<br /> lvis_instruct4v_220k.json<br />llava_v1_5_mix665k.json(only text-only examples) |
-| DistillGPT4V-13B_vit-l14-336px_Pretrain | 1     | training                                                     | Vicuna-13B-v1.5 | CLIP-L-336px   | MLP-2x     | 1,166,048             | /                                | share-captioner_coco_lcs_sam_1246k_1107.json(filtered ill and no-exist examples) | /                                                            |
-| DistillGPT4V-7B_vit-l14-336px           | 1,2   | training                                                     | Vicuna-7B-v1.5  | CLIP-L-336px   | MLP-2x     | 1,166,048             | 359,783=<br />96384+222711+40688 | share-captioner_coco_lcs_sam_1246k_1107.json(filtered ill and no-exist examples) | sharegpt4v_instruct_gpt4-vision_cap100k.json(filtered ill examples)<br /> lvis_instruct4v_220k.json<br />llava_v1_5_mix665k.json(only text-only examples) |
-| DistillGPT4V-7B_vit-l14-336px_Pretrain  | 1     | [Maxlinn/DistillGPT4V-7B_vit-l14-336px_Pretrain](https://huggingface.co/Maxlinn/DistillGPT4V-7B_vit-l14-336px_Pretrain) | Vicuna-7B-v1.5  | CLIP-L-336px   | MLP-2x     | 1,166,048             | /                                | share-captioner_coco_lcs_sam_1246k_1107.json(filtered ill and no-exist examples) | /                                                            |
-
+| DistillGPT4V-13B_vit-l14-336px          | 1,2   | training                                                     | Vicuna-13B-v1.5 | CLIP-L-336px   | MLP-2x     | 1,166,048             | 359,783=<br />96384+222711+40688 | share-captioner_coco_lcs_sam_1246k_1107.json(filtered ill examples) | sharegpt4v_instruct_gpt4-vision_cap100k.json(filtered ill and non-exist examples)<br /> lvis_instruct4v_220k.json<br />llava_v1_5_mix665k.json(only text-only examples) |
+| DistillGPT4V-13B_vit-l14-336px_Pretrain | 1     | training                                                     | Vicuna-13B-v1.5 | CLIP-L-336px   | MLP-2x     | 1,166,048             | /                                | share-captioner_coco_lcs_sam_1246k_1107.json(filtered ill examples) | /                                                            |
+| DistillGPT4V-7B_vit-l14-336px           | 1,2   | training                                                     | Vicuna-7B-v1.5  | CLIP-L-336px   | MLP-2x     | 1,166,048             | 359,783=<br />96384+222711+40688 | share-captioner_coco_lcs_sam_1246k_1107.json(filtered ill examples) | sharegpt4v_instruct_gpt4-vision_cap100k.json(filtered ill and non-exist examples)<br /> lvis_instruct4v_220k.json<br />llava_v1_5_mix665k.json(only text-only examples) |
+| DistillGPT4V-7B_vit-l14-336px_Pretrain  | 1     | [Maxlinn/DistillGPT4V-7B_vit-l14-336px_Pretrain](https://huggingface.co/Maxlinn/DistillGPT4V-7B_vit-l14-336px_Pretrain) | Vicuna-7B-v1.5  | CLIP-L-336px   | MLP-2x     | 1,166,048             | /                                | share-captioner_coco_lcs_sam_1246k_1107.json(filtered ill examples) | /                                                            |
 
 ## Training
 
@@ -54,7 +53,7 @@ Dataset used:
 - https://huggingface.co/datasets/Lin-Chen/ShareGPT4V, sharegpt4v_instruct_gpt4-vision_cap100k.json
     - Pure golden captioning instructions by prompting GPT4V.
     - NOTE: we removed 5637 ill examples from it which contains 'sa_', see examples at #Ill examples of ShareGPT4V.
-    - NOTE: we removed 4 examples which 'image' is not exist in their provided images. see at #No-exist examples of ShareGPT4V.
+    - NOTE: we removed 4 examples which 'image' is not exist in their provided images. see at #Non-exist examples of ShareGPT4V.
     - Contains images from
         - coco train2017
         - llava pretrain
@@ -105,7 +104,7 @@ Attribution-NonCommercial 4.0 International It should abide by the policy of Ope
 ...
 ```
 
-### No-exist examples of ShareGPT4V
+### Non-exist examples of ShareGPT4V
 
 ```py
 [{'id': 'Choi_Min-sik',
