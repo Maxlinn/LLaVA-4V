@@ -22,10 +22,6 @@ The training is done on 8x80G gpus on 1 node, the settings are the same as llava
 
 ## Model Zoo
 
-<<<<<<< HEAD
-=======
-- For stage-1 training, we use deepspeed zero2 by default. But for 13b we use zero3 and `gradient_accumulate_steps=2` and half `per_device_batch_size` to avoid OOM.
->>>>>>> 69ce9867d84e755ccff09a1114d9a58e206d2688
 
 | Name                                | Comment                          | Stage | Checkpoint                                                   | LLM             | Vision Encoder | Projection |
 | ----------------------------------- | -------------------------------- | ----- | ------------------------------------------------------------ | --------------- | -------------- | ---------- |
