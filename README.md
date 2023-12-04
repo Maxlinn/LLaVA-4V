@@ -22,10 +22,12 @@ The training is done on 8x80G gpus on 1 node, the settings are the same as llava
 
 ## Model Zoo
 
+*all checkpoints has ready but some of them are uploading.*
+
 
 | Name                                | Comment                          | Stage | Checkpoint                                                   | LLM             | Vision Encoder | Projection |
 | ----------------------------------- | -------------------------------- | ----- | ------------------------------------------------------------ | --------------- | -------------- | ---------- |
-| LLaVA-4V-13B_vit-l14-336px          | **best for general use**         | 1,2   | [LLaVA-4V-13B_vit-l14-336px](https://huggingface.co/datasets/Maxlinn/LLaVA-4V-13B_vit-l14-336px)                                                     | Vicuna-13B-v1.5 | CLIP-L14-336px | MLP-2x     |
+| LLaVA-4V-13B_vit-l14-336px          | **best for general use**         | 1,2   | [Maxlinn/LLaVA-4V-13B_vit-l14-336px](https://huggingface.co/Maxlinn/LLaVA-4V-13B_vit-l14-336px)                                                     | Vicuna-13B-v1.5 | CLIP-L14-336px | MLP-2x     |
 | LLaVA-4V-13B_vit-l14-336px_Pretrain | best for captioning              | 1     | [Maxlinn/LLaVA-4V-13B_vit-l14-336px_Pretrain](https://huggingface.co/Maxlinn/LLaVA-4V-13B_vit-l14-336px_Pretrain)                                                     | Vicuna-13B-v1.5 | CLIP-L14-336px | MLP-2x     |
 | LLaVA-4V-7B_vit-l14-336px           | good for general use             | 1,2   | [Maxlinn/LLaVA-4V-7B_vit-l14-336px](https://huggingface.co/Maxlinn/LLaVA-4V-7B_vit-l14-336px) | Vicuna-7B-v1.5  | CLIP-L14-336px | MLP-2x     |
 | LLaVA-4V-7B_vit-l14-336px_Pretrain  | good for captioning              | 1     | [Maxlinn/LLaVA-4V-7B_vit-l14-336px_Pretrain](https://huggingface.co/Maxlinn/LLaVA-4V-7B_vit-l14-336px_Pretrain) | Vicuna-7B-v1.5  | CLIP-L14-336px | MLP-2x     |
